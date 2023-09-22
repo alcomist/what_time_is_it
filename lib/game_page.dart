@@ -18,6 +18,27 @@ class _GamePageState extends State<GamePage> {
 
   final game = GameLogic();
 
+  showExit(BuildContext context, VoidCallback callback) {
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: const Text('게임을 그만두시겠습니까?', textAlign: TextAlign.center),
+          actions: [
+            TextButton(onPressed: () {
+              Navigator.of(context).pop();
+              callback();
+            }, child: const Text('예')),
+            TextButton(onPressed: () {
+              Navigator.of(context).pop();
+            }, child: const Text('아니오')),
+          ],
+        );
+      },
+    );
+  }
+
   showResult(BuildContext context, bool correct, VoidCallback callback) {
 
     void close() {
@@ -67,10 +88,14 @@ class _GamePageState extends State<GamePage> {
           )
         ],
         leading: IconButton(
-          icon: const Icon(Icons.backspace),
+          icon: const Icon(Icons.close),
           onPressed: () {
 
-            Navigator.pop(context);
+            void onExit() {
+              Navigator.of(context).pop();
+            }
+
+            showExit(context, onExit);
           },
         ),
       ),

@@ -7,6 +7,13 @@ import 'game_page.dart';
 class GameSelectPage extends StatelessWidget {
   const GameSelectPage({Key? key}) : super(key: key);
 
+  void _onPressed(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const GamePage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = context.watch<AppState>();
@@ -22,10 +29,7 @@ class GameSelectPage extends StatelessWidget {
             ElevatedButton.icon(
               onPressed: () {
                 state.difficulty = GameDifficulty.easy;
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const GamePage()),
-                );
+                _onPressed(context);
               },
               icon: const Icon(Icons.star),
               label: const Text('쉬움'),
@@ -34,10 +38,7 @@ class GameSelectPage extends StatelessWidget {
             ElevatedButton.icon(
               onPressed: () {
                 state.difficulty = GameDifficulty.normal;
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const GamePage()),
-                );
+                _onPressed(context);
               },
               icon: const Icon(Icons.star),
               label: const Text('보통'),
@@ -46,10 +47,7 @@ class GameSelectPage extends StatelessWidget {
             ElevatedButton.icon(
               onPressed: () {
                 state.difficulty = GameDifficulty.hard;
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const GamePage()),
-                );
+                _onPressed(context);
               },
               icon: const Icon(Icons.star),
               label: const Text('어려움'),
@@ -58,10 +56,7 @@ class GameSelectPage extends StatelessWidget {
             ElevatedButton.icon(
               onPressed: () {
                 state.difficulty = GameDifficulty.random;
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const GamePage()),
-                );
+                _onPressed(context);
               },
               icon: const Icon(Icons.star),
               label: const Text('아무거나'),

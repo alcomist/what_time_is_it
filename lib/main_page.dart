@@ -26,7 +26,7 @@ class MainPage extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: const Text('Settings'),
+            title: const Text('메인 페이지'),
             actions: <Widget>[
               IconButton(
                 icon: const Icon(
