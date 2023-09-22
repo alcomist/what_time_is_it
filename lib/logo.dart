@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'user_select.dart';
 
 class LogoScreen extends StatelessWidget {
   const LogoScreen({super.key});
@@ -19,7 +20,7 @@ class LogoScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const SecondRoute()),
+                  MaterialPageRoute(builder: (context) => const UserSelectScreen()),
                 );
               },
               child: const Text('시작'),
