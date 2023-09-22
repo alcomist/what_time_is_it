@@ -5,6 +5,7 @@ import 'package:whattimeisit/game_select_page.dart';
 
 import 'app_state.dart';
 import 'user_select_page.dart';
+import 'bottom_menu.dart';
 
 class MainPage extends StatelessWidget {
   MainPage({super.key});
@@ -13,7 +14,6 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     final state = context.watch<AppState>();
 
     final theme = Theme.of(context);
@@ -25,39 +25,57 @@ class MainPage extends StatelessWidget {
 
     return SafeArea(
         child: Scaffold(
-            body: Center(
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Flexible(
-                flex: 1,
-                child: Center(child: Text(state.getUser())),
-              ),
-              Flexible(
-                  flex: 1,
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: AnalogClock(
-                      key: _analogClockKey,
-                    ),
-                  )),
+          appBar: AppBar(
+            title: const Text('Settings'),
+            actions: <Widget>[
+              IconButton(
+                icon: const Icon(
+                  Icons.settings,
+                  color: Colors.blueAccent,
+                ),
+                onPressed: () {
+                  // do something
+                },
+              )
             ],
           ),
-          const SizedBox(
-            height: 30,
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const GameSelectPage()),
-              );
-            },
-            child: Text('난이도 선택', style: style),
-          ),
-        ],
+
+      body: Center(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Flexible(
+                  flex: 1,
+                  child: Center(child: Text(state.getUser())),
+                ),
+                Flexible(
+                    flex: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: AnalogClock(
+                        key: _analogClockKey,
+                      ),
+                    )),
+              ],
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const GameSelectPage()),
+                );
+              },
+              child: Text('난이도 선택', style: style),
+            ),
+          ],
+        ),
       ),
-    )));
+      //bottomNavigationBar: const BottomMenu(),
+    ));
   }
 }

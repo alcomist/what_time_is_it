@@ -18,7 +18,7 @@ class _GamePageState extends State<GamePage> {
 
   final game = GameLogic();
 
-  showAlert(BuildContext context, bool correct, VoidCallback callback) {
+  showResult(BuildContext context, bool correct, VoidCallback callback) {
 
     void close() {
       callback();
@@ -35,8 +35,8 @@ class _GamePageState extends State<GamePage> {
       builder: (BuildContext context) {
         return AlertDialog(
           content: correct
-              ? const Text('맞았습니다.', textAlign: TextAlign.center,
-          ) : const Text('틀렸습니다.', textAlign: TextAlign.center),
+              ? const Text('맞았습니다.', textAlign: TextAlign.center)
+              : const Text('틀렸습니다.', textAlign: TextAlign.center),
         );
       },
     );
@@ -44,7 +44,6 @@ class _GamePageState extends State<GamePage> {
 
   @override
   Widget build(BuildContext context) {
-
     final state = context.watch<AppState>();
 
     game.difficulty = state.difficulty;
@@ -55,10 +54,22 @@ class _GamePageState extends State<GamePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('난이도 선택'),
+        title: const Text('시간 맞추기'),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(
+              Icons.settings,
+              color: Colors.blueAccent,
+            ),
+            onPressed: () {
+              // do something
+            },
+          )
+        ],
         leading: IconButton(
           icon: const Icon(Icons.backspace),
           onPressed: () {
+
             Navigator.pop(context);
           },
         ),
@@ -95,7 +106,7 @@ class _GamePageState extends State<GamePage> {
                     //item 의 반목문 항목 형성
                     return ElevatedButton(
                         onPressed: () {
-                          showAlert(context, game.isCorrect(index), () {
+                          showResult(context, game.isCorrect(index), () {
                             setState(() {});
                           });
                         },

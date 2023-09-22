@@ -83,7 +83,6 @@ class GameLogic {
 }
 
 class AppState extends ChangeNotifier {
-
   String user = '';
   GameDifficulty difficulty = GameDifficulty.easy;
 
