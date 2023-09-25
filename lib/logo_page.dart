@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'user_select_page.dart';
 
 class LogoPage extends StatelessWidget {
@@ -18,7 +21,9 @@ class LogoPage extends StatelessWidget {
             body: Center(
       child: Column(
         children: [
-          const Text('지금 몇시지?'),
+          Text(AppLocalizations.of(context)!.appTitle,
+            style: GoogleFonts.leckerliOne(fontSize: 40),
+          ),
           const SizedBox(
             height: 30,
           ),

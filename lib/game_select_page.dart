@@ -16,6 +16,10 @@ class GameSelectPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final buttonStyle = ElevatedButton.styleFrom(
+        minimumSize: const Size.fromHeight(50));
+
     final state = context.watch<AppState>();
 
     return Scaffold(
@@ -27,38 +31,42 @@ class GameSelectPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton.icon(
+              style: buttonStyle,
               onPressed: () {
                 state.difficulty = GameDifficulty.easy;
                 _onPressed(context);
               },
-              icon: const Icon(Icons.star),
+              icon: const Icon(Icons.directions_walk),
               label: const Text('쉬움'),
             ),
             const SizedBox(height: 10),
             ElevatedButton.icon(
+              style: buttonStyle,
               onPressed: () {
                 state.difficulty = GameDifficulty.normal;
                 _onPressed(context);
               },
-              icon: const Icon(Icons.star),
+              icon: const Icon(Icons.directions_run),
               label: const Text('보통'),
             ),
             const SizedBox(height: 10),
             ElevatedButton.icon(
+              style: buttonStyle,
               onPressed: () {
                 state.difficulty = GameDifficulty.hard;
                 _onPressed(context);
               },
-              icon: const Icon(Icons.star),
+              icon: const Icon(Icons.directions_bike),
               label: const Text('어려움'),
             ),
             const SizedBox(height: 10),
             ElevatedButton.icon(
+              style: buttonStyle,
               onPressed: () {
                 state.difficulty = GameDifficulty.random;
                 _onPressed(context);
               },
-              icon: const Icon(Icons.star),
+              icon: const Icon(Icons.psychology_alt),
               label: const Text('아무거나'),
             ),
           ],

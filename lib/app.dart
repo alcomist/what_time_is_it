@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'logo_page.dart';
 import 'app_state.dart';
 
@@ -17,12 +20,21 @@ class MainApp extends StatelessWidget {
       create: (context) => AppState(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'What time is it?',
-        theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
-        ),
+        title: '지금 몇시지?',
+        theme: ThemeData(primarySwatch: Colors.orange),
         home: const LogoPage(),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        //localizationsDelegates: const [
+        //  AppLocalizations.delegate,
+        //  GlobalMaterialLocalizations.delegate,
+        //  GlobalWidgetsLocalizations.delegate,
+        //  GlobalCupertinoLocalizations.delegate,
+        //],
+        //supportedLocales: const [
+        //  Locale('en'), // English
+        //  Locale('ko'), // Korean
+        //],
       ),
     );
   }
