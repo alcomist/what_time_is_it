@@ -1,19 +1,16 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum GameDifficulty {
   easy,
   normal,
   hard,
-  random,
+  veryHard,
 }
 
 class GameLogic {
-  late GameDifficulty _difficulty;
-
-  set difficulty(GameDifficulty difficulty) {
-    _difficulty = difficulty;
-  }
+  late GameDifficulty difficulty;
 
   int _hour = 0;
   int _minute = 0;
@@ -38,15 +35,15 @@ class GameLogic {
   }
 
   int _randomMinute() {
-    return switch (_difficulty) {
+    return switch (difficulty) {
       GameDifficulty.easy => 0, // 정각
       GameDifficulty.normal => Random().nextInt(6) * 10, // 10분 단위
       GameDifficulty.hard => Random().nextInt(12) * 5, // 5분 단위
-      GameDifficulty.random => Random().nextInt(60), // 1분 단위
+      GameDifficulty.veryHard => Random().nextInt(60), // 1분 단위
     };
   }
 
-  void generate() {
+  void generate(BuildContext context) {
     _hour = _randomHour();
     _minute = _randomMinute();
 
@@ -54,13 +51,14 @@ class GameLogic {
 
     _initQuestions();
 
-    _questions[_answer] = _clockString(_hour, _minute);
+    _questions[_answer] =
+        AppLocalizations.of(context)!.currentTime(_hour, _minute);
 
     for (var i = 0; i < 4; i++) {
       if (i == _answer) continue;
 
       while (true) {
-        var str = _clockString(_randomHour(), _randomMinute());
+        var str = AppLocalizations.of(context)!.currentTime(_randomHour(), _randomMinute());
         if (_questions.contains(str)) {
           continue;
         }
@@ -83,6 +81,7 @@ class GameLogic {
 }
 
 class AppState extends ChangeNotifier {
+
   String user = '';
   GameDifficulty difficulty = GameDifficulty.easy;
 

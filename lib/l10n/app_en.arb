@@ -6,5 +6,67 @@
   "appTitle": "What time is it?",
   "@appTitle": {
     "description": "App's Title"
+  },
+  "quitMessage": "Do you want to quit?'",
+  "@quitMessage": {
+    "description": "Quit game message"
+  },
+  "answerYes": "Yes",
+  "@answerYes": {
+    "description": "Answer yes"
+  },
+  "answerNo": "No",
+  "@answerNo": {
+    "description": "Answer no"
+  },
+  "answerCorrect": "Correct",
+  "@answerCorrect": {
+    "description": "Correct answer"
+  },
+  "answerIncorrect": "Incorrect",
+  "@answerIncorrect": {
+    "description": "Incorrect answer"
+  },
+  "difficulty": "Difficulty",
+  "@difficulty": {
+    "description": "Difficulty"
+  },
+  "chooseDifficulty": "Choose difficulty",
+  "@chooseDifficulty": {
+    "description": "Choose difficulty"
+  },
+  "difficultyEasy": "Easy",
+  "@difficultyEasy": {
+    "description": "Easy difficulty"
+  },
+  "difficultyNormal": "Normal",
+  "@difficultyNormal": {
+    "description": "Normal difficulty"
+  },
+  "difficultyHard": "Hard",
+  "@difficultyHard": {
+    "description": "Hard difficulty"
+  },
+  "difficultyVeryHard": "Very Hard",
+  "@difficultyVeryHard": {
+    "description": "Very hard difficulty"
+  },
+  "gameStart": "Start",
+  "@gameStart": {
+    "description": "Start game message"
+  },
+  "currentTime": "It's {hour} {minute, plural, =0{o'clock} other{: {minute}}}",
+  "@currentTime": {
+    "description": "Current time (Hour:Minute)",
+    "placeholders": {
+      "hour": {
+        "type": "num",
+        "example": "1"
+      },
+      "minute": {
+        "type": "num",
+        "example": "31"
+      }
+    }
   }
 }

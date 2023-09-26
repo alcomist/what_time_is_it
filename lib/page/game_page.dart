@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_analog_clock/flutter_analog_clock.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'app_state.dart';
+import '../app_state.dart';
 
 class GamePage extends StatefulWidget {
   const GamePage({super.key});
@@ -24,15 +25,16 @@ class _GamePageState extends State<GamePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          content: const Text('게임을 그만두시겠습니까?', textAlign: TextAlign.center),
+          content: Text(AppLocalizations.of(context)!.quitMessage, textAlign: TextAlign.center),
+          actionsAlignment: MainAxisAlignment.spaceEvenly,
           actions: [
             TextButton(onPressed: () {
               Navigator.of(context).pop();
               callback();
-            }, child: const Text('예')),
+            }, child: Text(AppLocalizations.of(context)!.answerYes)),
             TextButton(onPressed: () {
               Navigator.of(context).pop();
-            }, child: const Text('아니오')),
+            }, child: Text(AppLocalizations.of(context)!.answerNo)),
           ],
         );
       },
@@ -56,26 +58,56 @@ class _GamePageState extends State<GamePage> {
       builder: (BuildContext context) {
         return AlertDialog(
           content: correct
-              ? const Text('맞았습니다.', textAlign: TextAlign.center)
-              : const Text('틀렸습니다.', textAlign: TextAlign.center),
+              ? Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.thumb_up,
+                      color: Colors.blueAccent,
+                    ),
+                    Text(AppLocalizations.of(context)!.answerCorrect, textAlign: TextAlign.center)
+                  ],
+          )
+              :
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.thumb_down,
+                color: Colors.redAccent,
+              ),
+              Text(AppLocalizations.of(context)!.answerIncorrect, textAlign: TextAlign.center)
+            ],
+          ),
         );
       },
     );
   }
 
+  String _getDifficulty(BuildContext context, GameDifficulty difficulty) {
+
+    return switch(difficulty) {
+      GameDifficulty.easy => AppLocalizations.of(context)!.difficultyEasy,
+      GameDifficulty.normal => AppLocalizations.of(context)!.difficultyNormal,
+      GameDifficulty.hard => AppLocalizations.of(context)!.difficultyHard,
+      GameDifficulty.veryHard => AppLocalizations.of(context)!.difficultyVeryHard,
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
+
     final state = context.watch<AppState>();
 
     game.difficulty = state.difficulty;
-    game.generate();
+    game.generate(context);
 
     _analogClockKey.currentState?.dateTime = game.getTime();
     final questions = game.questions;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('시간 맞추기'),
+        title: Text('${AppLocalizations.of(context)!.difficulty} : ${_getDifficulty(context, game.difficulty)}'),
         actions: <Widget>[
           IconButton(
             icon: const Icon(
@@ -131,6 +163,7 @@ class _GamePageState extends State<GamePage> {
                     //item 의 반목문 항목 형성
                     return ElevatedButton(
                         onPressed: () {
+
                           showResult(context, game.isCorrect(index), () {
                             setState(() {});
                           });

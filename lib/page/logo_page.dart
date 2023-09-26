@@ -40,7 +40,7 @@ class LogoPage extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => const UserSelectPage()),
               );
             },
-            child: Text('시작', style: style),
+            child: Text(AppLocalizations.of(context)!.gameStart, style: style),
           ),
         ],
       ),

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_analog_clock/flutter_analog_clock.dart';
-import 'package:whattimeisit/game_select_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'app_state.dart';
+import '../app_state.dart';
+import 'game_select_page.dart';
+
 import 'user_select_page.dart';
-import 'bottom_menu.dart';
+import '../bottom_menu.dart';
 
 class MainPage extends StatelessWidget {
   MainPage({super.key});
@@ -19,7 +21,7 @@ class MainPage extends StatelessWidget {
     final theme = Theme.of(context);
 
     // ↓ Add this.
-    final style = theme.textTheme.displayMedium!.copyWith(
+    final style = theme.textTheme.displaySmall!.copyWith(
       color: theme.colorScheme.onPrimary,
     );
 
@@ -70,7 +72,7 @@ class MainPage extends StatelessWidget {
                       builder: (context) => const GameSelectPage()),
                 );
               },
-              child: Text('난이도 선택', style: style),
+              child: Text(AppLocalizations.of(context)!.chooseDifficulty, style: style),
             ),
           ],
         ),

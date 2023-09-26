@@ -1,4 +1,17 @@
 {
   "helloWorld": "안녕 세상아!",
-  "appTitle": "지금 몇시일까나리액젓?"
+  "appTitle": "지금 몇시일까요?",
+  "quitMessage": "게임을 그만두시겠습니까?",
+  "chooseDifficulty": "난이도 선택",
+  "answerYes": "예",
+  "answerNo": "아니오",
+  "answerCorrect": "맞았습니다",
+  "answerIncorrect": "틀렸습니다",
+  "difficulty": "난이도",
+  "difficultyEasy": "쉬움",
+  "difficultyNormal": "보통",
+  "difficultyHard": "어려움",
+  "difficultyVeryHard": "매우 어려움",
+  "gameStart": "시작",
+  "currentTime": "{hour}시 {minute, plural, =0{정각} other{{minute}분}}"
 }

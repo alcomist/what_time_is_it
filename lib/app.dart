@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'logo_page.dart';
+import 'page/logo_page.dart';
 import 'app_state.dart';
 
 void main() {
@@ -20,8 +20,20 @@ class MainApp extends StatelessWidget {
       create: (context) => AppState(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: '지금 몇시지?',
-        theme: ThemeData(primarySwatch: Colors.orange),
+        title: 'What time is it?',
+        theme: ThemeData(
+          brightness: Brightness.light,
+          primaryColor: Colors.green,
+          appBarTheme: AppBarTheme(
+            elevation: 10,
+            titleTextStyle: const TextTheme(
+              titleLarge: TextStyle(
+                fontFamily: 'LeckerliOne',
+                fontSize: 24,
+              ),
+            ).titleLarge,
+          ),
+        ),
         home: const LogoPage(),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
