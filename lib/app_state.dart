@@ -9,18 +9,24 @@ enum GameDifficulty {
   veryHard,
 }
 
+typedef Question = ({int hour, int minute});
+
 class GameLogic {
+
   late GameDifficulty difficulty;
+  late List<Question> _questions = List<Question>.filled(4, (hour: 0, minute: 0));
+
+  final List<bool> _userAnswers = [];
 
   int _hour = 0;
   int _minute = 0;
   int _answer = 0;
 
-  List<String> _questions = List<String>.filled(4, '');
-
-  void _initQuestions() {
-    _questions = List<String>.filled(4, '');
+  void _init() {
+    _questions = List<Question>.filled(4, (hour: 0, minute: 0));
   }
+
+  List<Question> get questions => _questions;
 
   String _clockString(int hour, int minute) {
     if (minute == 0) {
@@ -43,27 +49,29 @@ class GameLogic {
     };
   }
 
-  void generate(BuildContext context) {
+  void generate() {
+
     _hour = _randomHour();
     _minute = _randomMinute();
 
     _answer = Random().nextInt(4);
 
-    _initQuestions();
+    _init();
 
-    _questions[_answer] =
-        AppLocalizations.of(context)!.currentTime(_hour, _minute);
+    //_questions[_answer] = AppLocalizations.of(context)!.currentTime(_hour, _minute);
+    _questions[_answer] = (hour: _hour, minute:_minute);
 
     for (var i = 0; i < 4; i++) {
       if (i == _answer) continue;
 
       while (true) {
-        var str = AppLocalizations.of(context)!.currentTime(_randomHour(), _randomMinute());
-        if (_questions.contains(str)) {
+        //var question = AppLocalizations.of(context)!.currentTime(_randomHour(), _randomMinute());
+        final question = (hour: _randomHour(), minute: _randomMinute());
+        if (_questions.contains(question)) {
           continue;
         }
 
-        _questions[i] = str;
+        _questions[i] = question;
         break;
       }
     }
@@ -77,7 +85,17 @@ class GameLogic {
     return _answer == index;
   }
 
-  List<String> get questions => _questions;
+  bool isEnd() {
+    return _userAnswers.length == 10;
+  }
+
+  int userAnswersLength() {
+    return _userAnswers.length;
+  }
+
+  void addUserAnswer(bool correct) {
+    _userAnswers.add(correct);
+  }
 }
 
 class AppState extends ChangeNotifier {

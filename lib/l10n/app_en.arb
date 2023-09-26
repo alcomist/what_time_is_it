@@ -68,5 +68,19 @@
         "example": "31"
       }
     }
+  },
+  "currentGame": "{current} of {total}",
+  "@currentGame": {
+    "description": "Current game status (current/total)",
+    "placeholders": {
+      "current": {
+        "type": "num",
+        "example": "1"
+      },
+      "total": {
+        "type": "num",
+        "example": "10"
+      }
+    }
   }
 }

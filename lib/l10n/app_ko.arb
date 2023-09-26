@@ -13,5 +13,6 @@
   "difficultyHard": "어려움",
   "difficultyVeryHard": "매우 어려움",
   "gameStart": "시작",
-  "currentTime": "{hour}시 {minute, plural, =0{정각} other{{minute}분}}"
+  "currentTime": "{hour}시 {minute, plural, =0{정각} other{{minute}분}}",
+  "currentGame": "{total}개 중 {current}번째 게임"
 }

@@ -6,8 +6,11 @@ import 'package:flutter_analog_clock/flutter_analog_clock.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../app_state.dart';
+import '../localizer.dart';
+import 'game_result_page.dart';
 
 class GamePage extends StatefulWidget {
+
   const GamePage({super.key});
 
   @override
@@ -19,7 +22,7 @@ class _GamePageState extends State<GamePage> {
 
   final game = GameLogic();
 
-  showExit(BuildContext context, VoidCallback callback) {
+  _exitDialog(BuildContext context, VoidCallback callback) {
 
     showDialog(
       context: context,
@@ -41,7 +44,7 @@ class _GamePageState extends State<GamePage> {
     );
   }
 
-  showResult(BuildContext context, bool correct, VoidCallback callback) {
+  _gameResultDialog(BuildContext context, bool correct, VoidCallback callback) {
 
     void close() {
       callback();
@@ -84,30 +87,20 @@ class _GamePageState extends State<GamePage> {
     );
   }
 
-  String _getDifficulty(BuildContext context, GameDifficulty difficulty) {
-
-    return switch(difficulty) {
-      GameDifficulty.easy => AppLocalizations.of(context)!.difficultyEasy,
-      GameDifficulty.normal => AppLocalizations.of(context)!.difficultyNormal,
-      GameDifficulty.hard => AppLocalizations.of(context)!.difficultyHard,
-      GameDifficulty.veryHard => AppLocalizations.of(context)!.difficultyVeryHard,
-    };
-  }
-
   @override
   Widget build(BuildContext context) {
 
     final state = context.watch<AppState>();
 
     game.difficulty = state.difficulty;
-    game.generate(context);
+    game.generate();
 
     _analogClockKey.currentState?.dateTime = game.getTime();
     final questions = game.questions;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${AppLocalizations.of(context)!.difficulty} : ${_getDifficulty(context, game.difficulty)}'),
+        title: Text(Localizer.getDifficultyTitle(context, game.difficulty)),
         actions: <Widget>[
           IconButton(
             icon: const Icon(
@@ -127,7 +120,7 @@ class _GamePageState extends State<GamePage> {
               Navigator.of(context).pop();
             }
 
-            showExit(context, onExit);
+            _exitDialog(context, onExit);
           },
         ),
       ),
@@ -137,6 +130,10 @@ class _GamePageState extends State<GamePage> {
           children: [
             Flexible(
                 flex: 1,
+                child: Text(AppLocalizations.of(context)!.currentGame(game.userAnswersLength()+1, 10)),
+            ),
+            Flexible(
+                flex: 3,
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: AnalogClock(
@@ -148,7 +145,7 @@ class _GamePageState extends State<GamePage> {
                   ),
                 )),
             Flexible(
-              flex: 2,
+              flex: 4,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: GridView.builder(
@@ -164,11 +161,20 @@ class _GamePageState extends State<GamePage> {
                     return ElevatedButton(
                         onPressed: () {
 
-                          showResult(context, game.isCorrect(index), () {
+                          var correct = game.isCorrect(index);
+                          game.addUserAnswer(correct);
+                          if ( game.isEnd() ) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const GameResultPage()),
+                            );
+                          }
+
+                          _gameResultDialog(context, correct, () {
                             setState(() {});
                           });
                         },
-                        child: Text(questions[index],
+                        child: Text(Localizer.getCurrentTime(context, questions[index]),
                             style: Theme.of(context).textTheme.headlineSmall));
                   },
                 ),

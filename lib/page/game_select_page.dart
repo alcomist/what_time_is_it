@@ -6,6 +6,7 @@ import '../app_state.dart';
 import 'game_page.dart';
 
 class GameSelectPage extends StatelessWidget {
+
   const GameSelectPage({Key? key}) : super(key: key);
 
   void _onPressed(BuildContext context) {
