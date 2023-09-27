@@ -58,6 +58,7 @@ class _GamePageState extends State<GamePage> {
 
     showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
           content: correct

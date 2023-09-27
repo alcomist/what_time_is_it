@@ -70,8 +70,6 @@ class GameLogic {
   bool isCorrect(int index) {
     return _answerIndex == index;
   }
-
-
 }
 
 class AppState extends ChangeNotifier {
@@ -102,6 +100,12 @@ class AppState extends ChangeNotifier {
   void addUserAnswer(bool correct) {
     _userAnswers.add(correct);
     notifyListeners();
+  }
+
+  (int correct, int incorrect) getResult() {
+    return (
+        _userAnswers.where((element) => element==true).toList().length,
+        _userAnswers.where((element) => element==false).toList().length);
   }
 
   void setUser(user) {

@@ -1,8 +1,4 @@
 {
-  "helloWorld": "Hello World!",
-  "@helloWorld": {
-    "description": "The conventional newborn programmer greeting"
-  },
   "appTitle": "What time is it?",
   "@appTitle": {
     "description": "App's Title"
@@ -62,6 +58,22 @@
   "gameResult": "Game Result",
   "@gameResult": {
     "description": "Game result message"
+  },
+  "gameResultExcellent": "Excellent",
+  "@gameResultExcellent": {
+    "description": "Excellent game result message"
+  },
+  "gameResultVeryGood": "Very Good",
+  "@gameResultVeryGood": {
+    "description": "Very good game result message"
+  },
+  "gameResultGood": "Good",
+  "@gameResultGood": {
+    "description": "Good game result message"
+  },
+  "gameResultPoor": "Poor",
+  "@gameResultPoor": {
+    "description": "Poor game result message"
   },
   "currentTime": "It's {hour} {minute, plural, =0{o'clock} other{: {minute}}}",
   "@currentTime": {

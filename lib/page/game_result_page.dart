@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:whattimeisit/app_state.dart';
+import 'package:whattimeisit/localizer.dart';
+import 'package:whattimeisit/big_card.dart';
 import 'package:whattimeisit/page/game_select_page.dart';
 
 class GameResultPage extends StatefulWidget {
@@ -71,9 +73,9 @@ class _GameResultPageState extends State<GameResultPage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text('게임 결과'),
-              Text('맞음 : '),
-              Text('틀림 : '),
-              Text('참 잘했어요'),
+              Text('맞음 : ${state.getResult().$1}'),
+              Text('틀림 : ${state.getResult().$2}'),
+              BigCard(message: Localizer.getGameResultMessage(context, state.getResult().$1)),
             ],
           ),
         )

@@ -23,4 +23,14 @@ class Localizer {
     };
   }
 
+  static String getGameResultMessage(BuildContext context, int score) {
+
+    return switch(score) {
+      10 => AppLocalizations.of(context)!.gameResultExcellent,
+      >= 5 && <= 9 => AppLocalizations.of(context)!.gameResultVeryGood,
+      >= 1 && <= 4 => AppLocalizations.of(context)!.gameResultGood,
+      0 => AppLocalizations.of(context)!.gameResultPoor,
+      int() => 'invalid',
+    };
+  }
 }
