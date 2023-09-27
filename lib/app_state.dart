@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum GameDifficulty {
   easy,
@@ -13,28 +12,20 @@ typedef Question = ({int hour, int minute});
 
 class GameLogic {
 
+  late Question _answer;
+  late int _answerIndex;
   late GameDifficulty difficulty;
-  late List<Question> _questions = List<Question>.filled(4, (hour: 0, minute: 0));
 
-  final List<bool> _userAnswers = [];
+  late List<Question> _questions;
 
-  int _hour = 0;
-  int _minute = 0;
-  int _answer = 0;
 
-  void _init() {
+  GameLogic() {
+    _answer = (hour: 0, minute: 0);
+    _answerIndex = 0;
     _questions = List<Question>.filled(4, (hour: 0, minute: 0));
   }
 
   List<Question> get questions => _questions;
-
-  String _clockString(int hour, int minute) {
-    if (minute == 0) {
-      return '$hour시 정각';
-    }
-
-    return '$hour시 $minute분';
-  }
 
   int _randomHour() {
     return Random().nextInt(12) + 1;
@@ -51,18 +42,13 @@ class GameLogic {
 
   void generate() {
 
-    _hour = _randomHour();
-    _minute = _randomMinute();
+    _answer = (hour: _randomHour(), minute: _randomMinute());
+    _answerIndex = Random().nextInt(4);
 
-    _answer = Random().nextInt(4);
-
-    _init();
-
-    //_questions[_answer] = AppLocalizations.of(context)!.currentTime(_hour, _minute);
-    _questions[_answer] = (hour: _hour, minute:_minute);
+    _questions[_answerIndex] = _answer;
 
     for (var i = 0; i < 4; i++) {
-      if (i == _answer) continue;
+      if (i == _answerIndex) continue;
 
       while (true) {
         //var question = AppLocalizations.of(context)!.currentTime(_randomHour(), _randomMinute());
@@ -78,11 +64,31 @@ class GameLogic {
   }
 
   DateTime getTime() {
-    return DateTime(2023, 6, 7, _hour, _minute);
+    return DateTime(2023, 6, 7, _answer.hour, _answer.minute);
   }
 
   bool isCorrect(int index) {
-    return _answer == index;
+    return _answerIndex == index;
+  }
+
+
+}
+
+class AppState extends ChangeNotifier {
+
+  String user = '';
+  GameDifficulty difficulty = GameDifficulty.easy;
+
+  late List<bool> _userAnswers;
+
+  List<bool> get userAnswers => _userAnswers;
+
+  AppState() {
+    init();
+  }
+
+  void init() {
+    _userAnswers = [];
   }
 
   bool isEnd() {
@@ -95,15 +101,8 @@ class GameLogic {
 
   void addUserAnswer(bool correct) {
     _userAnswers.add(correct);
+    notifyListeners();
   }
-}
-
-class AppState extends ChangeNotifier {
-
-  String user = '';
-  GameDifficulty difficulty = GameDifficulty.easy;
-
-  AppState();
 
   void setUser(user) {
     this.user = user;
@@ -111,13 +110,5 @@ class AppState extends ChangeNotifier {
 
   String getUser() {
     return user;
-  }
-
-  void toggleFavorite() {
-    notifyListeners();
-  }
-
-  void removeFavorite() {
-    notifyListeners();
   }
 }

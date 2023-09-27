@@ -11,6 +11,10 @@
   "@quitMessage": {
     "description": "Quit game message"
   },
+  "quitToGameSelectMessage": "Do you want to go difficulty selection?",
+  "@quitToGameSelectMessage": {
+    "description": "Quit to game select message"
+  },
   "answerYes": "Yes",
   "@answerYes": {
     "description": "Answer yes"
@@ -54,6 +58,10 @@
   "gameStart": "Start",
   "@gameStart": {
     "description": "Start game message"
+  },
+  "gameResult": "Game Result",
+  "@gameResult": {
+    "description": "Game result message"
   },
   "currentTime": "It's {hour} {minute, plural, =0{o'clock} other{: {minute}}}",
   "@currentTime": {

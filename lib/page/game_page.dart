@@ -47,8 +47,8 @@ class _GamePageState extends State<GamePage> {
   _gameResultDialog(BuildContext context, bool correct, VoidCallback callback) {
 
     void close() {
-      callback();
       Navigator.of(context).pop();
+      callback();
     }
 
     Timer.periodic(const Duration(milliseconds: 500), (timer) {
@@ -85,6 +85,12 @@ class _GamePageState extends State<GamePage> {
         );
       },
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<AppState>(context, listen: false).init();
   }
 
   @override
@@ -130,7 +136,7 @@ class _GamePageState extends State<GamePage> {
           children: [
             Flexible(
                 flex: 1,
-                child: Text(AppLocalizations.of(context)!.currentGame(game.userAnswersLength()+1, 10)),
+                child: Text(AppLocalizations.of(context)!.currentGame(state.userAnswers.length+1, 10)),
             ),
             Flexible(
                 flex: 3,
@@ -162,16 +168,17 @@ class _GamePageState extends State<GamePage> {
                         onPressed: () {
 
                           var correct = game.isCorrect(index);
-                          game.addUserAnswer(correct);
-                          if ( game.isEnd() ) {
+                          state.addUserAnswer(correct);
+                          if ( state.isEnd() ) {
+
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const GameResultPage()),
+                              MaterialPageRoute(builder: (context) => GameResultPage()),
                             );
                           }
 
                           _gameResultDialog(context, correct, () {
-                            setState(() {});
+
                           });
                         },
                         child: Text(Localizer.getCurrentTime(context, questions[index]),
