@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../app_state.dart';
+import 'package:what_time_is_it/app_state.dart';
 import 'main_page.dart';
 
 class UserSelectPage extends StatelessWidget {

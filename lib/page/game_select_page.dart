@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../app_state.dart';
+import 'package:what_time_is_it/app_state.dart';
 import 'game_page.dart';
 
 class GameSelectPage extends StatelessWidget {

@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 import 'package:flutter_analog_clock/flutter_analog_clock.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../app_state.dart';
-import '../localizer.dart';
-import 'game_result_page.dart';
+import 'package:what_time_is_it/app_state.dart';
+import 'package:what_time_is_it/localizer.dart';
+import 'package:what_time_is_it/page/game_result_page.dart';
 
 class GamePage extends StatefulWidget {
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:whattimeisit/app_state.dart';
-import 'package:whattimeisit/localizer.dart';
-import 'package:whattimeisit/big_card.dart';
-import 'package:whattimeisit/page/game_select_page.dart';
+import 'package:what_time_is_it/app_state.dart';
+import 'package:what_time_is_it/localizer.dart';
+import 'package:what_time_is_it/big_card.dart';
+import 'package:what_time_is_it/page/game_select_page.dart';
 
 class GameResultPage extends StatefulWidget {
 
