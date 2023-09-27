@@ -72,7 +72,7 @@ class _GameResultPageState extends State<GameResultPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text('게임 결과'),
+              Text(AppLocalizations.of(context)!.gameResult),
               Text('맞음 : ${state.getResult().$1}'),
               Text('틀림 : ${state.getResult().$2}'),
               BigCard(message: Localizer.getGameResultMessage(context, state.getResult().$1)),
