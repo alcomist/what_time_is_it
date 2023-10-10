@@ -2,19 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'package:what_time_is_it/route/route.dart';
+import 'package:what_time_is_it/route/notifier.dart';
+
 import 'package:what_time_is_it/app_state.dart';
-import 'game_play_page.dart';
+import 'package:what_time_is_it/page/game_play_page.dart';
 
 class GameSelectPage extends StatelessWidget {
 
   const GameSelectPage({Key? key}) : super(key: key);
-
-  void _onPressed(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const GamePlayPage()),
-    );
-  }
 
   static const TextStyle textStyle = TextStyle(fontSize: 30);
 
@@ -25,6 +21,7 @@ class GameSelectPage extends StatelessWidget {
         minimumSize: const Size.fromHeight(100));
 
     final state = context.watch<AppState>();
+    final notifier = Provider.of<PageNotifier>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -41,7 +38,7 @@ class GameSelectPage extends StatelessWidget {
                   style: buttonStyle,
                   onPressed: () {
                     state.difficulty = GameDifficulty.easy;
-                    _onPressed(context);
+                    notifier.changePage(page: PageName.gamePlay.name);
                   },
                   icon: const Icon(Icons.directions_walk),
                   label: Text(AppLocalizations.of(context)!.difficultyEasy, style: textStyle),
@@ -51,7 +48,7 @@ class GameSelectPage extends StatelessWidget {
                   style: buttonStyle,
                   onPressed: () {
                     state.difficulty = GameDifficulty.normal;
-                    _onPressed(context);
+                    notifier.changePage(page: PageName.gamePlay.name);
                   },
                   icon: const Icon(Icons.directions_run),
                   label: Text(AppLocalizations.of(context)!.difficultyNormal, style: textStyle),
@@ -61,7 +58,7 @@ class GameSelectPage extends StatelessWidget {
                   style: buttonStyle,
                   onPressed: () {
                     state.difficulty = GameDifficulty.hard;
-                    _onPressed(context);
+                    notifier.changePage(page: PageName.gamePlay.name);
                   },
                   icon: const Icon(Icons.directions_bike),
                   label: Text(AppLocalizations.of(context)!.difficultyHard, style: textStyle),
@@ -71,7 +68,7 @@ class GameSelectPage extends StatelessWidget {
                   style: buttonStyle,
                   onPressed: () {
                     state.difficulty = GameDifficulty.veryHard;
-                    _onPressed(context);
+                    notifier.changePage(page: PageName.gamePlay.name);
                   },
                   icon: const Icon(Icons.psychology_alt),
                   label: Text(AppLocalizations.of(context)!.difficultyVeryHard, style: textStyle),

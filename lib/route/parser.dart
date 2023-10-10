@@ -18,8 +18,8 @@ class AppRouteInformationParser extends RouteInformationParser<AppRoute> {
     }
 
     if (uri.pathSegments.length == 1) {
-      print('parse');
-      print(uri.pathSegments.first);
+      //print('parse');
+      //print(uri.pathSegments.first);
 
       return AppRoute.getInstance(uri.pathSegments.first);
     }
@@ -30,8 +30,8 @@ class AppRouteInformationParser extends RouteInformationParser<AppRoute> {
   //This passes route information to the parseRouteInformation method depending on the current AppRoute
   @override
   RouteInformation? restoreRouteInformation(AppRoute configuration) {
-    print('restore');
-    print(configuration.pageName);
+    //print('restore');
+    //print(configuration.pageName);
 
     return RouteInformation(location: '/$configuration.pageName');
   }

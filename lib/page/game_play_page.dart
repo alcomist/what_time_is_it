@@ -5,9 +5,11 @@ import 'package:provider/provider.dart';
 import 'package:flutter_analog_clock/flutter_analog_clock.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'package:what_time_is_it/route/notifier.dart';
+import 'package:what_time_is_it/route/route.dart';
+
 import 'package:what_time_is_it/app_state.dart';
 import 'package:what_time_is_it/app_localization.dart';
-import 'package:what_time_is_it/page/game_result_page.dart';
 
 class GamePlayPage extends StatefulWidget {
 
@@ -18,6 +20,7 @@ class GamePlayPage extends StatefulWidget {
 }
 
 class _GamePlayPageState extends State<GamePlayPage> {
+
   final GlobalKey<AnalogClockState> _analogClockKey = GlobalKey();
 
   final game = GameLogic();
@@ -44,11 +47,10 @@ class _GamePlayPageState extends State<GamePlayPage> {
     );
   }
 
-  _gameResultDialog(BuildContext context, bool correct, VoidCallback callback) {
+  _gameResultDialog(BuildContext context, bool correct) {
 
     void close() {
       Navigator.of(context).pop();
-      callback();
     }
 
     Timer.periodic(const Duration(milliseconds: 500), (timer) {
@@ -98,6 +100,7 @@ class _GamePlayPageState extends State<GamePlayPage> {
   Widget build(BuildContext context) {
 
     final state = context.watch<AppState>();
+    final notifier = Provider.of<PageNotifier>(context);
 
     game.difficulty = state.difficulty;
     game.generate();
@@ -171,16 +174,11 @@ class _GamePlayPageState extends State<GamePlayPage> {
                           var correct = game.isCorrect(index);
                           state.addUserAnswer(correct);
                           if ( state.isEnd() ) {
-
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => const GameResultPage()),
-                            );
+                            notifier.changePage(page: PageName.gameResult.name);
+                          } else {
+                            _gameResultDialog(context, correct);
                           }
 
-                          _gameResultDialog(context, correct, () {
-
-                          });
                         },
                         child: Text(AppLocalization.getCurrentTime(context, questions[index]),
                             style: Theme.of(context).textTheme.headlineSmall));

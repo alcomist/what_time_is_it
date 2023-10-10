@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+
+import 'package:what_time_is_it/route/notifier.dart';
+import 'package:what_time_is_it/route/route.dart';
+
 import 'package:what_time_is_it/app_state.dart';
 import 'package:what_time_is_it/app_localization.dart';
 import 'package:what_time_is_it/big_card.dart';
@@ -47,6 +51,7 @@ class _GameResultPageState extends State<GameResultPage> {
   Widget build(BuildContext context) {
 
     final state = context.watch<AppState>();
+    final notifier = Provider.of<PageNotifier>(context);
 
     return SafeArea(
       child: Scaffold(
@@ -57,10 +62,7 @@ class _GameResultPageState extends State<GameResultPage> {
             onPressed: () {
 
               void onExit() {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const GameSelectPage()),
-                );
+                notifier.changePage(page: PageName.gameSelect.name);
               }
 
               _exitDialog(context, onExit);
