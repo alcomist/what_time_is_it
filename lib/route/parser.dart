@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:what_time_is_it/route/route.dart';
 
 class AppRouteInformationParser extends RouteInformationParser<AppRoute> {
-
   @override
   Future<AppRoute> parseRouteInformation(
       RouteInformation routeInformation) async {

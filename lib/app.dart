@@ -33,57 +33,18 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      routeInformationParser: AppRouteInformationParser(),
-      routerDelegate: AppRouterDelegate(notifier: Provider.of<PageNotifier>(context)),
-      title: 'What time is it?',
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      theme: ThemeData(
-        brightness: Brightness.light,
-        primaryColor: Colors.green,
-        appBarTheme: AppBarTheme(
-          elevation: 10,
-          titleTextStyle: const TextTheme(
-            titleLarge: TextStyle(
-              fontFamily: 'LeckerliOne',
-              fontSize: 24,
-            ),
-          ).titleLarge,
-        ),
-      ),
-    );
-
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'What time is it?',
-      theme: ThemeData(
-        brightness: Brightness.light,
-        primaryColor: Colors.green,
-        appBarTheme: AppBarTheme(
-          elevation: 10,
-          titleTextStyle: const TextTheme(
-            titleLarge: TextStyle(
-              fontFamily: 'LeckerliOne',
-              fontSize: 24,
-            ),
-          ).titleLarge,
-        ),
-      ),
-      home: const LogoPage(),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      //localizationsDelegates: const [
-      //  AppLocalizations.delegate,
-      //  GlobalMaterialLocalizations.delegate,
-      //  GlobalWidgetsLocalizations.delegate,
-      //  GlobalCupertinoLocalizations.delegate,
-      //],
-      //supportedLocales: const [
-      //  Locale('en'), // English
-      //  Locale('ko'), // Korean
-      //],
-    );
+        debugShowCheckedModeBanner: false,
+        routeInformationParser: AppRouteInformationParser(),
+        routerDelegate:
+            AppRouterDelegate(notifier: Provider.of<PageNotifier>(context)),
+        title: 'What time is it?',
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        theme: ThemeData(
+          colorSchemeSeed: Colors.green,
+          useMaterial3: true,
+          brightness: Brightness.dark,
+        ));
   }
 }
 
@@ -108,7 +69,7 @@ class MainAppOld extends StatelessWidget {
           ).titleLarge,
         ),
       ),
-      home: const LogoPage(),
+      //home: const LogoPage(),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       //localizationsDelegates: const [

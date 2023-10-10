@@ -12,7 +12,6 @@ import 'package:what_time_is_it/app_state.dart';
 import 'package:what_time_is_it/app_localization.dart';
 
 class GamePlayPage extends StatefulWidget {
-
   const GamePlayPage({super.key});
 
   @override
@@ -20,43 +19,49 @@ class GamePlayPage extends StatefulWidget {
 }
 
 class _GamePlayPageState extends State<GamePlayPage> {
-
   final GlobalKey<AnalogClockState> _analogClockKey = GlobalKey();
 
   final game = GameLogic();
 
   _exitDialog(BuildContext context, VoidCallback callback) {
-
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          content: Text(AppLocalizations.of(context)!.quitMessage, textAlign: TextAlign.center),
+          content: Text(AppLocalizations.of(context)!.quitMessage,
+              textAlign: TextAlign.center),
           actionsAlignment: MainAxisAlignment.spaceEvenly,
           actions: [
-            TextButton(onPressed: () {
-              Navigator.of(context).pop();
-              callback();
-            }, child: Text(AppLocalizations.of(context)!.answerYes)),
-            TextButton(onPressed: () {
-              Navigator.of(context).pop();
-            }, child: Text(AppLocalizations.of(context)!.answerNo)),
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  callback();
+                },
+                child: Text(AppLocalizations.of(context)!.answerYes)),
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text(AppLocalizations.of(context)!.answerNo)),
           ],
         );
       },
     );
   }
 
-  _gameResultDialog(BuildContext context, bool correct) {
+  _gameResultDialog(BuildContext context, bool correct, VoidCallback callback) {
 
     void close() {
       Navigator.of(context).pop();
+      callback();
     }
 
     Timer.periodic(const Duration(milliseconds: 500), (timer) {
       close();
       timer.cancel();
     });
+
+    final style = Theme.of(context).textTheme.headlineSmall;
 
     showDialog(
       context: context,
@@ -65,26 +70,27 @@ class _GamePlayPageState extends State<GamePlayPage> {
         return AlertDialog(
           content: correct
               ? Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Icon(
                       Icons.thumb_up,
                       color: Colors.blueAccent,
                     ),
-                    Text(AppLocalizations.of(context)!.answerCorrect, textAlign: TextAlign.center)
+                    Text(AppLocalizations.of(context)!.answerCorrect,
+                        textAlign: TextAlign.center, style: style,)
                   ],
-          )
-              :
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(
-                Icons.thumb_down,
-                color: Colors.redAccent,
-              ),
-              Text(AppLocalizations.of(context)!.answerIncorrect, textAlign: TextAlign.center)
-            ],
-          ),
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.thumb_down,
+                      color: Colors.redAccent,
+                    ),
+                    Text(AppLocalizations.of(context)!.answerIncorrect,
+                        textAlign: TextAlign.center, style: style,)
+                  ],
+                ),
         );
       },
     );
@@ -98,7 +104,6 @@ class _GamePlayPageState extends State<GamePlayPage> {
 
   @override
   Widget build(BuildContext context) {
-
     final state = context.watch<AppState>();
     final notifier = Provider.of<PageNotifier>(context);
 
@@ -110,7 +115,10 @@ class _GamePlayPageState extends State<GamePlayPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalization.getDifficultyTitle(context, game.difficulty)),
+        centerTitle: true,
+        title:
+            Text(AppLocalization.getDifficultyTitle(context, game.difficulty),
+            style: Theme.of(context).textTheme.titleLarge),
         actions: <Widget>[
           IconButton(
             icon: const Icon(
@@ -125,9 +133,9 @@ class _GamePlayPageState extends State<GamePlayPage> {
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () {
-
             void onExit() {
-              Navigator.of(context).pop();
+              notifier.changePage(page: PageName.gameSelect.name);
+              //Navigator.of(context).pop();
             }
 
             _exitDialog(context, onExit);
@@ -139,8 +147,9 @@ class _GamePlayPageState extends State<GamePlayPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Flexible(
-                flex: 1,
-                child: Text(AppLocalizations.of(context)!.currentGame(state.userAnswers.length+1, 10)),
+              flex: 1,
+              child: Text(AppLocalizations.of(context)!
+                  .currentGame(state.userAnswers.length + 1, 10), style: Theme.of(context).textTheme.titleMedium),
             ),
             Flexible(
                 flex: 3,
@@ -168,19 +177,22 @@ class _GamePlayPageState extends State<GamePlayPage> {
                   ),
                   itemBuilder: (BuildContext context, int index) {
                     //item 의 반목문 항목 형성
-                    return ElevatedButton(
+                    return OutlinedButton(
                         onPressed: () {
-
                           var correct = game.isCorrect(index);
                           state.addUserAnswer(correct);
-                          if ( state.isEnd() ) {
+                          if (state.isEnd()) {
                             notifier.changePage(page: PageName.gameResult.name);
                           } else {
-                            _gameResultDialog(context, correct);
-                          }
 
+                            _gameResultDialog(context, correct, () {
+                              setState(() {});
+                            });
+                          }
                         },
-                        child: Text(AppLocalization.getCurrentTime(context, questions[index]),
+                        child: Text(
+                            AppLocalization.getCurrentTime(
+                                context, questions[index]),
                             style: Theme.of(context).textTheme.headlineSmall));
                   },
                 ),

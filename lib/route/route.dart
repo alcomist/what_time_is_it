@@ -34,7 +34,6 @@ class AppRoute {
   }
 
   static AppRoute getInstance(String path) {
-
     if (isUnknown(path)) {
       return AppRoute.unknown();
     }

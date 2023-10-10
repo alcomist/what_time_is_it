@@ -12,13 +12,11 @@ enum GameDifficulty {
 typedef Question = ({int hour, int minute});
 
 class GameLogic {
-
   late Question _answer;
   late int _answerIndex;
   late GameDifficulty difficulty;
 
   late List<Question> _questions;
-
 
   GameLogic() {
     _answer = (hour: 0, minute: 0);
@@ -42,7 +40,6 @@ class GameLogic {
   }
 
   void generate() {
-
     _answer = (hour: _randomHour(), minute: _randomMinute());
     _answerIndex = Random().nextInt(4);
 
@@ -74,7 +71,6 @@ class GameLogic {
 }
 
 class AppState extends ChangeNotifier {
-
   String user = '';
   GameDifficulty difficulty = GameDifficulty.easy;
 
@@ -100,13 +96,14 @@ class AppState extends ChangeNotifier {
 
   void addUserAnswer(bool correct) {
     _userAnswers.add(correct);
-    notifyListeners();
+    //notifyListeners();
   }
 
   (int correct, int incorrect) getResult() {
     return (
-        _userAnswers.where((element) => element==true).toList().length,
-        _userAnswers.where((element) => element==false).toList().length);
+      _userAnswers.where((element) => element == true).toList().length,
+      _userAnswers.where((element) => element == false).toList().length
+    );
   }
 
   void setUser(user) {

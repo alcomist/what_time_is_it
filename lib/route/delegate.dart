@@ -10,7 +10,6 @@ import 'package:what_time_is_it/page/not_found_page.dart';
 
 class AppRouterDelegate extends RouterDelegate<AppRoute>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<AppRoute> {
-
   final PageNotifier notifier;
 
   AppRouterDelegate({required this.notifier});
@@ -24,9 +23,9 @@ class AppRouterDelegate extends RouterDelegate<AppRoute>
         key: navigatorKey,
         pages: [
           if (AppRoute.isUnknown(notifier.pageName))
-            const MaterialPage(child: NotFoundPage()),
+            MaterialPage(child: LogoPage()),
           if (notifier.pageName == PageName.main.name)
-            const MaterialPage(child: LogoPage()),
+            MaterialPage(child: LogoPage()),
           if (notifier.pageName == PageName.gameSelect.name)
             const MaterialPage(child: GameSelectPage()),
           if (notifier.pageName == PageName.gamePlay.name)

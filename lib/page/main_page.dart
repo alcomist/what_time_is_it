@@ -10,7 +10,6 @@ import 'user_select_page.dart';
 import '../bottom_menu.dart';
 
 class MainPage extends StatelessWidget {
-
   MainPage({super.key});
 
   final GlobalKey<AnalogClockState> _analogClockKey = GlobalKey();
@@ -28,20 +27,20 @@ class MainPage extends StatelessWidget {
 
     return SafeArea(
         child: Scaffold(
-          appBar: AppBar(
-            title: const Text('메인 페이지'),
-            actions: <Widget>[
-              IconButton(
-                icon: const Icon(
-                  Icons.settings,
-                  color: Colors.blueAccent,
-                ),
-                onPressed: () {
-                  // do something
-                },
-              )
-            ],
-          ),
+      appBar: AppBar(
+        title: const Text('메인 페이지'),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(
+              Icons.settings,
+              color: Colors.blueAccent,
+            ),
+            onPressed: () {
+              // do something
+            },
+          )
+        ],
+      ),
 
       body: Center(
         child: Column(
@@ -73,7 +72,8 @@ class MainPage extends StatelessWidget {
                       builder: (context) => const GameSelectPage()),
                 );
               },
-              child: Text(AppLocalizations.of(context)!.chooseDifficulty, style: style),
+              child: Text(AppLocalizations.of(context)!.chooseDifficulty,
+                  style: style),
             ),
           ],
         ),
