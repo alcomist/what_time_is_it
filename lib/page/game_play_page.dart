@@ -6,18 +6,18 @@ import 'package:flutter_analog_clock/flutter_analog_clock.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:what_time_is_it/app_state.dart';
-import 'package:what_time_is_it/localizer.dart';
+import 'package:what_time_is_it/app_localization.dart';
 import 'package:what_time_is_it/page/game_result_page.dart';
 
-class GamePage extends StatefulWidget {
+class GamePlayPage extends StatefulWidget {
 
-  const GamePage({super.key});
+  const GamePlayPage({super.key});
 
   @override
-  State<GamePage> createState() => _GamePageState();
+  State<GamePlayPage> createState() => _GamePlayPageState();
 }
 
-class _GamePageState extends State<GamePage> {
+class _GamePlayPageState extends State<GamePlayPage> {
   final GlobalKey<AnalogClockState> _analogClockKey = GlobalKey();
 
   final game = GameLogic();
@@ -107,7 +107,7 @@ class _GamePageState extends State<GamePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(Localizer.getDifficultyTitle(context, game.difficulty)),
+        title: Text(AppLocalization.getDifficultyTitle(context, game.difficulty)),
         actions: <Widget>[
           IconButton(
             icon: const Icon(
@@ -182,7 +182,7 @@ class _GamePageState extends State<GamePage> {
 
                           });
                         },
-                        child: Text(Localizer.getCurrentTime(context, questions[index]),
+                        child: Text(AppLocalization.getCurrentTime(context, questions[index]),
                             style: Theme.of(context).textTheme.headlineSmall));
                   },
                 ),

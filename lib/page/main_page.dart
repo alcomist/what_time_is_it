@@ -4,12 +4,13 @@ import 'package:flutter_analog_clock/flutter_analog_clock.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:what_time_is_it/app_state.dart';
-import 'game_select_page.dart';
+import 'package:what_time_is_it/page/game_select_page.dart';
 
 import 'user_select_page.dart';
 import '../bottom_menu.dart';
 
 class MainPage extends StatelessWidget {
+
   MainPage({super.key});
 
   final GlobalKey<AnalogClockState> _analogClockKey = GlobalKey();

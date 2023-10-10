@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:what_time_is_it/app_state.dart';
-import 'package:what_time_is_it/localizer.dart';
+import 'package:what_time_is_it/app_localization.dart';
 import 'package:what_time_is_it/big_card.dart';
 import 'package:what_time_is_it/page/game_select_page.dart';
 
@@ -75,7 +75,7 @@ class _GameResultPageState extends State<GameResultPage> {
               Text(AppLocalizations.of(context)!.gameResult),
               Text('맞음 : ${state.getResult().$1}'),
               Text('틀림 : ${state.getResult().$2}'),
-              BigCard(message: Localizer.getGameResultMessage(context, state.getResult().$1)),
+              BigCard(message: AppLocalization.getGameResultMessage(context, state.getResult().$1)),
             ],
           ),
         )

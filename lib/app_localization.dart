@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'app_state.dart';
 
-class Localizer {
+class AppLocalization {
 
   static String getCurrentTime(BuildContext context, Question question) {
     return AppLocalizations.of(context)!.currentTime(question.hour, question.minute);

@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'page/logo_page.dart';
+import 'package:what_time_is_it/page/logo_page.dart';
+import 'package:what_time_is_it/route/notifier.dart';
 import 'app_state.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const App());
+}
+
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(providers: [
+      ChangeNotifierProvider<PageNotifier>(create: (context) => PageNotifier()),
+      ChangeNotifierProvider<AppState>(create: (_) => AppState()),
+    ], child: const MainApp());
+  }
 }
 
 class MainApp extends StatelessWidget {
@@ -16,38 +28,35 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => AppState(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'What time is it?',
-        theme: ThemeData(
-          brightness: Brightness.light,
-          primaryColor: Colors.green,
-          appBarTheme: AppBarTheme(
-            elevation: 10,
-            titleTextStyle: const TextTheme(
-              titleLarge: TextStyle(
-                fontFamily: 'LeckerliOne',
-                fontSize: 24,
-              ),
-            ).titleLarge,
-          ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'What time is it?',
+      theme: ThemeData(
+        brightness: Brightness.light,
+        primaryColor: Colors.green,
+        appBarTheme: AppBarTheme(
+          elevation: 10,
+          titleTextStyle: const TextTheme(
+            titleLarge: TextStyle(
+              fontFamily: 'LeckerliOne',
+              fontSize: 24,
+            ),
+          ).titleLarge,
         ),
-        home: const LogoPage(),
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        //localizationsDelegates: const [
-        //  AppLocalizations.delegate,
-        //  GlobalMaterialLocalizations.delegate,
-        //  GlobalWidgetsLocalizations.delegate,
-        //  GlobalCupertinoLocalizations.delegate,
-        //],
-        //supportedLocales: const [
-        //  Locale('en'), // English
-        //  Locale('ko'), // Korean
-        //],
       ),
+      home: const LogoPage(),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      //localizationsDelegates: const [
+      //  AppLocalizations.delegate,
+      //  GlobalMaterialLocalizations.delegate,
+      //  GlobalWidgetsLocalizations.delegate,
+      //  GlobalCupertinoLocalizations.delegate,
+      //],
+      //supportedLocales: const [
+      //  Locale('en'), // English
+      //  Locale('ko'), // Korean
+      //],
     );
   }
 }
