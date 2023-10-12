@@ -24,13 +24,13 @@ class AppRouterDelegate extends RouterDelegate<AppRoute>
         pages: [
           if (AppRoute.isUnknown(notifier.pageName))
             MaterialPage(child: LogoPage()),
-          if (notifier.pageName == PageName.main.name)
+          if (notifier.pageName == PageNames.main.name)
             MaterialPage(child: LogoPage()),
-          if (notifier.pageName == PageName.gameSelect.name)
+          if (notifier.pageName == PageNames.gameSelect.name)
             const MaterialPage(child: GameSelectPage()),
-          if (notifier.pageName == PageName.gamePlay.name)
+          if (notifier.pageName == PageNames.gamePlay.name)
             const MaterialPage(child: GamePlayPage()),
-          if (notifier.pageName == PageName.gameResult.name)
+          if (notifier.pageName == PageNames.gameResult.name)
             const MaterialPage(child: GameResultPage()),
         ],
         onPopPage: (route, result) => route.didPop(result));

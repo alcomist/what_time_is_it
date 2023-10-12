@@ -18,7 +18,6 @@ class GameResultPage extends StatefulWidget {
 }
 
 class _GameResultPageState extends State<GameResultPage> {
-
   _exitDialog(BuildContext context, VoidCallback callback) {
     showDialog(
       context: context,
@@ -52,7 +51,7 @@ class _GameResultPageState extends State<GameResultPage> {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<AppState>();
+    final state = context.watch<GameAppState>();
     final notifier = Provider.of<PageNotifier>(context);
 
     return SafeArea(
@@ -62,7 +61,7 @@ class _GameResultPageState extends State<GameResultPage> {
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 void onExit() {
-                  notifier.changePage(page: PageName.gameSelect.name);
+                  notifier.changePage(page: PageNames.gameSelect.name);
                 }
 
                 _exitDialog(context, onExit);
@@ -80,16 +79,20 @@ class _GameResultPageState extends State<GameResultPage> {
                   color: Theme.of(context).colorScheme.secondary,
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: Text('맞음 : ${state.getResult().$1}',
-                      style: Theme.of(context).textTheme.headlineMedium,),
+                    child: Text(
+                      '맞음 : ${state.getResult().$1}',
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
                   ),
                 ),
                 Card(
                   color: Theme.of(context).colorScheme.primary,
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: Text('틀림 : ${state.getResult().$2}',
-                        style: Theme.of(context).textTheme.headlineMedium,),
+                    child: Text(
+                      '틀림 : ${state.getResult().$2}',
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
                   ),
                 ),
                 BigCard(

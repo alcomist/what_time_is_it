@@ -70,7 +70,7 @@ class GameLogic {
   }
 }
 
-class AppState extends ChangeNotifier {
+class GameAppState extends ChangeNotifier {
   String user = '';
   GameDifficulty difficulty = GameDifficulty.easy;
 
@@ -78,7 +78,7 @@ class AppState extends ChangeNotifier {
 
   List<bool> get userAnswers => _userAnswers;
 
-  AppState() {
+  GameAppState() {
     init();
   }
 

@@ -50,7 +50,6 @@ class _GamePlayPageState extends State<GamePlayPage> {
   }
 
   _gameResultDialog(BuildContext context, bool correct, VoidCallback callback) {
-
     void close() {
       Navigator.of(context).pop();
       callback();
@@ -76,8 +75,14 @@ class _GamePlayPageState extends State<GamePlayPage> {
                       Icons.thumb_up,
                       color: Colors.blueAccent,
                     ),
-                    Text(AppLocalizations.of(context)!.answerCorrect,
-                        textAlign: TextAlign.center, style: style,)
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      AppLocalizations.of(context)!.answerCorrect,
+                      textAlign: TextAlign.center,
+                      style: style,
+                    )
                   ],
                 )
               : Row(
@@ -87,8 +92,14 @@ class _GamePlayPageState extends State<GamePlayPage> {
                       Icons.thumb_down,
                       color: Colors.redAccent,
                     ),
-                    Text(AppLocalizations.of(context)!.answerIncorrect,
-                        textAlign: TextAlign.center, style: style,)
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      AppLocalizations.of(context)!.answerIncorrect,
+                      textAlign: TextAlign.center,
+                      style: style,
+                    )
                   ],
                 ),
         );
@@ -99,12 +110,12 @@ class _GamePlayPageState extends State<GamePlayPage> {
   @override
   void initState() {
     super.initState();
-    Provider.of<AppState>(context, listen: false).init();
+    Provider.of<GameAppState>(context, listen: false).init();
   }
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<AppState>();
+    final state = context.watch<GameAppState>();
     final notifier = Provider.of<PageNotifier>(context);
 
     game.difficulty = state.difficulty;
@@ -116,25 +127,14 @@ class _GamePlayPageState extends State<GamePlayPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title:
-            Text(AppLocalization.getDifficultyTitle(context, game.difficulty),
+        title: Text(
+            AppLocalization.getDifficultyTitle(context, game.difficulty),
             style: Theme.of(context).textTheme.titleLarge),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(
-              Icons.settings,
-              color: Colors.blueAccent,
-            ),
-            onPressed: () {
-              // do something
-            },
-          )
-        ],
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () {
             void onExit() {
-              notifier.changePage(page: PageName.gameSelect.name);
+              notifier.changePage(page: PageNames.gameSelect.name);
               //Navigator.of(context).pop();
             }
 
@@ -148,8 +148,10 @@ class _GamePlayPageState extends State<GamePlayPage> {
           children: [
             Flexible(
               flex: 1,
-              child: Text(AppLocalizations.of(context)!
-                  .currentGame(state.userAnswers.length + 1, 10), style: Theme.of(context).textTheme.titleMedium),
+              child: Text(
+                  AppLocalizations.of(context)!
+                      .currentGame(state.userAnswers.length + 1, 10),
+                  style: Theme.of(context).textTheme.titleMedium),
             ),
             Flexible(
                 flex: 3,
@@ -182,9 +184,9 @@ class _GamePlayPageState extends State<GamePlayPage> {
                           var correct = game.isCorrect(index);
                           state.addUserAnswer(correct);
                           if (state.isEnd()) {
-                            notifier.changePage(page: PageName.gameResult.name);
+                            notifier.changePage(
+                                page: PageNames.gameResult.name);
                           } else {
-
                             _gameResultDialog(context, correct, () {
                               setState(() {});
                             });

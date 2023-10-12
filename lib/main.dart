@@ -1,4 +1,7 @@
+import 'package:flutter/foundation.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -12,6 +15,14 @@ import 'package:what_time_is_it/page/logo_page.dart';
 import 'package:what_time_is_it/app_state.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
+
+  if (kDebugMode) {
+    MobileAds.instance.updateRequestConfiguration(RequestConfiguration(
+        testDeviceIds: ['42ABE9B8A4BD7D6A8AFB3A3F616A11BF']));
+  }
+
   runApp(const App());
 }
 
@@ -22,7 +33,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
       ChangeNotifierProvider<PageNotifier>(create: (context) => PageNotifier()),
-      ChangeNotifierProvider<AppState>(create: (_) => AppState()),
+      ChangeNotifierProvider<GameAppState>(create: (_) => GameAppState()),
     ], child: const MainApp());
   }
 }

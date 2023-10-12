@@ -16,7 +16,7 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<AppState>();
+    final state = context.watch<GameAppState>();
 
     final theme = Theme.of(context);
 

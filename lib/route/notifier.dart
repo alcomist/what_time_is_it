@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:what_time_is_it/route/route.dart';
 
 class PageNotifier extends ChangeNotifier {
-  String _pageName = PageName.main.name;
+  String _pageName = PageNames.main.name;
 
   get pageName => _pageName;
 

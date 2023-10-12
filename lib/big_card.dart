@@ -10,7 +10,6 @@ class BigCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final style = Theme.of(context).textTheme.headlineMedium;
 
     return Card(

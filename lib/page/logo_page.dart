@@ -9,6 +9,7 @@ import 'package:what_time_is_it/route/notifier.dart';
 import 'package:what_time_is_it/route/route.dart';
 
 import 'package:what_time_is_it/page/user_select_page.dart';
+import 'package:what_time_is_it/page/banner_page.dart';
 
 class LogoPage extends StatelessWidget {
   LogoPage({super.key});
@@ -17,7 +18,6 @@ class LogoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final notifier = Provider.of<PageNotifier>(context);
 
     return SafeArea(
@@ -52,7 +52,7 @@ class LogoPage extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              notifier.changePage(page: PageName.gameSelect.name);
+              notifier.changePage(page: PageNames.gameSelect.name);
               //Navigator.push(
               //  context,
               //  MaterialPageRoute(builder: (context) => const UserSelectPage()),
@@ -61,6 +61,10 @@ class LogoPage extends StatelessWidget {
             child: Text(AppLocalizations.of(context)!.gameStart,
                 style: Theme.of(context).textTheme.headlineLarge),
           ),
+          //Expanded(
+          //  child: Container(),
+          //),
+          const GameBannerPage(),
         ],
       ),
     )));
