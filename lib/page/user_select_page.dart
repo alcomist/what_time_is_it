@@ -9,7 +9,7 @@ class UserSelectPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<AppState>();
+    final state = context.watch<GameAppState>();
 
     return Scaffold(
         body: Center(
