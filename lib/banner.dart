@@ -1,19 +1,24 @@
 import 'dart:io';
 
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-class GameBannerPage extends StatefulWidget {
-  const GameBannerPage({super.key});
+class GameBanner {
 
-  @override
-  State<GameBannerPage> createState() => _GameBannerState();
-}
+  static final GameBanner _instance = GameBanner._internal(); //_internal : private 생성자
+  GameBanner._internal();
 
-class _GameBannerState extends State<GameBannerPage> {
+  factory GameBanner() {
+    return _instance;
+  }
+
+  GameBanner get instance => _instance;
 
   BannerAd? _bannerAd;
-  bool _isSupported = false;
+
+
+  bool _isLoaded = false;
+  bool _isAvailable = false;
 
   // AdMob test id
   //앱 오프닝 광고 : ca-app-pub-3940256099942544/3419835294
@@ -35,36 +40,33 @@ class _GameBannerState extends State<GameBannerPage> {
       ? 'ca-app-pub-3940256099942544/2934735716'
       : 'ca-app-pub-3940256099942544/6300978111';
 
-  Future<void> _loadAd() async {
+  Future<void> load(BuildContext context) async {
 
     if (Platform.isAndroid || Platform.isIOS) {
 
-      _isSupported = true;
+      if ( _isLoaded ) {
+        return;
+      }
 
-      final AnchoredAdaptiveBannerAdSize? size =
-      await AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
+      _isAvailable = true;
+
+      AnchoredAdaptiveBannerAdSize? size = await AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
           MediaQuery.of(context).size.width.truncate());
 
-      if (size == null) {
-        debugPrint('Unable to get height of anchored banner.');
+      if ( size == null ) {
         return;
       }
 
       BannerAd(
 
         adUnitId: adUnitId,
-
         size: size,
         request: const AdRequest(),
         listener: BannerAdListener(
           onAdLoaded: (Ad ad) {
             debugPrint('$ad loaded: ${ad.responseInfo}');
-
-            setState(() {
-              // When the ad is loaded, get the ad size and use it to set
-              // the height of the ad container.
-              _bannerAd = ad as BannerAd;
-            });
+            _bannerAd = ad as BannerAd;
+            _isLoaded = true;
           },
           onAdFailedToLoad: (Ad ad, LoadAdError error) {
             debugPrint('Anchored adaptive banner failedToLoad: $error');
@@ -75,46 +77,27 @@ class _GameBannerState extends State<GameBannerPage> {
     }
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _loadAd();
-  }
+  bool get isLoaded => _isLoaded;
 
-  @override
-  void dispose() {
-    _bannerAd?.dispose();
-    super.dispose();
-  }
+  Widget banner() {
 
-  Widget _mockupBanner() {
-    debugPrint('_mockupBanner');
+    if (_isAvailable) {
 
-    return const SizedBox.shrink();
-  }
+      if (_isLoaded ) {
 
-  Widget _banner() {
+        return SizedBox(
+            width: _bannerAd?.size.width.toDouble(),
+            height: _bannerAd?.size.height.toDouble(),
+            child: AdWidget(ad: _bannerAd!));
+      }
 
-    if ( _bannerAd == null ) {
       return SizedBox(
-          width: AdSize.largeBanner.width.toDouble(),
-          height: AdSize.largeBanner.height.toDouble(),
-      );
-    }
-
-    return SizedBox(
         width: AdSize.largeBanner.width.toDouble(),
         height: AdSize.largeBanner.height.toDouble(),
-        child: AdWidget(ad: _bannerAd!));
-  }
+      );
 
-  @override
-  Widget build(BuildContext context) {
-
-    if ( _isSupported == false ) {
-      return _mockupBanner();
+    } else {
+      return const SizedBox.shrink();
     }
-
-    return _banner();
   }
 }

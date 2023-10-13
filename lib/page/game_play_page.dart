@@ -11,6 +11,8 @@ import 'package:what_time_is_it/route/route.dart';
 import 'package:what_time_is_it/app_state.dart';
 import 'package:what_time_is_it/app_localization.dart';
 
+import 'banner_page.dart';
+
 class GamePlayPage extends StatefulWidget {
   const GamePlayPage({super.key});
 
@@ -200,6 +202,7 @@ class _GamePlayPageState extends State<GamePlayPage> {
                 ),
               ),
             ),
+            const GameBannerPage(),
           ],
         ),
       ),

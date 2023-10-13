@@ -10,6 +10,8 @@ import 'package:what_time_is_it/app_localization.dart';
 import 'package:what_time_is_it/big_card.dart';
 import 'package:what_time_is_it/page/game_select_page.dart';
 
+import 'banner_page.dart';
+
 class GameResultPage extends StatefulWidget {
   const GameResultPage({super.key});
 
@@ -98,6 +100,7 @@ class _GameResultPageState extends State<GameResultPage> {
                 BigCard(
                     message: AppLocalization.getGameResultMessage(
                         context, state.getResult().$1)),
+                const GameBannerPage(),
               ],
             ),
           )),

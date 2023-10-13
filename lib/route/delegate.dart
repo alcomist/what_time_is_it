@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:what_time_is_it/page/game_result_page.dart';
-import 'package:what_time_is_it/page/logo_page.dart';
+import 'package:what_time_is_it/page/main_page.dart';
 import 'package:what_time_is_it/route/route.dart';
 import 'package:what_time_is_it/route/notifier.dart';
-import 'package:what_time_is_it/page/main_page.dart';
+import 'package:what_time_is_it/page/splash_page.dart';
 import 'package:what_time_is_it/page/game_select_page.dart';
 import 'package:what_time_is_it/page/game_play_page.dart';
 import 'package:what_time_is_it/page/not_found_page.dart';
@@ -23,9 +23,11 @@ class AppRouterDelegate extends RouterDelegate<AppRoute>
         key: navigatorKey,
         pages: [
           if (AppRoute.isUnknown(notifier.pageName))
-            MaterialPage(child: LogoPage()),
+            MaterialPage(child: MainPage()),
+          if (notifier.pageName == PageNames.splash.name)
+            MaterialPage(child: SplashPage()),
           if (notifier.pageName == PageNames.main.name)
-            MaterialPage(child: LogoPage()),
+            MaterialPage(child: MainPage()),
           if (notifier.pageName == PageNames.gameSelect.name)
             const MaterialPage(child: GameSelectPage()),
           if (notifier.pageName == PageNames.gamePlay.name)

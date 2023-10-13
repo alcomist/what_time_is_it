@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:what_time_is_it/app_state.dart';
-import 'main_page.dart';
+import 'splash_page.dart';
 
 class UserSelectPage extends StatelessWidget {
   const UserSelectPage({super.key});
@@ -21,7 +21,7 @@ class UserSelectPage extends StatelessWidget {
               state.setUser('민찬');
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => MainPage()),
+                MaterialPageRoute(builder: (context) => SplashPage()),
               );
             },
             child: const Text('민찬'),
@@ -31,7 +31,7 @@ class UserSelectPage extends StatelessWidget {
               state.setUser('민기');
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => MainPage()),
+                MaterialPageRoute(builder: (context) => SplashPage()),
               );
             },
             child: const Text('민기'),

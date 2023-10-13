@@ -8,7 +8,7 @@ class AppRouteInformationParser extends RouteInformationParser<AppRoute> {
     final uri = routeInformation.uri;
 
     if (uri.pathSegments.isEmpty) {
-      return AppRoute.main();
+      return AppRoute.splash();
     }
 
     //If path includes more than one segement, go to 404

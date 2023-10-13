@@ -10,8 +10,6 @@ import 'package:what_time_is_it/route/notifier.dart';
 import 'package:what_time_is_it/route/parser.dart';
 import 'package:what_time_is_it/route/delegate.dart';
 
-import 'package:what_time_is_it/page/logo_page.dart';
-
 import 'package:what_time_is_it/app_state.dart';
 
 void main() {
@@ -52,7 +50,8 @@ class MainApp extends StatelessWidget {
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         theme: ThemeData(
-          colorSchemeSeed: Colors.green,
+          //scaffoldBackgroundColor: Colors.green,
+          colorSchemeSeed: Colors.purple,
           useMaterial3: true,
           brightness: Brightness.dark,
         ));
