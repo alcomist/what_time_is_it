@@ -56,13 +56,13 @@ class _ColorSeedButton extends StatelessWidget {
 
           return PopupMenuItem(
             value: index,
-            enabled: currentColor != ColorSeed.baseColor,
+            enabled: currentColor != setting.colorSelected,
             child: Wrap(
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 10),
                   child: Icon(
-                    currentColor == ColorSeed.baseColor
+                    currentColor == setting.colorSelected
                         ? Icons.color_lens
                         : Icons.color_lens_outlined,
                     color: currentColor.color,
@@ -142,6 +142,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final notifier = Provider.of<PageNotifier>(context);
+    final setting = Provider.of<AppSettingState>(context);
 
     return SafeArea(
         child: Scaffold(
@@ -160,12 +161,11 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                       Flexible(
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: AnalogClock(
-                            key: _analogClockKey,
+                          child: setting.useLightMode(context) ? AnalogClock.dark(key: _analogClockKey) : AnalogClock(key: _analogClockKey),
                           ),
                         ),
-                      ),
-                      ElevatedButton(
+
+                      FilledButton(
                         onPressed: () {
                           notifier.changePage(page: PageNames.gameSelect.name);
                         },

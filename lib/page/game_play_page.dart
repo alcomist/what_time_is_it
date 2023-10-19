@@ -119,6 +119,7 @@ class _GamePlayPageState extends State<GamePlayPage> {
   Widget build(BuildContext context) {
     final state = context.watch<GameAppState>();
     final notifier = Provider.of<PageNotifier>(context);
+    final setting = context.watch<AppSettingState>();
 
     game.difficulty = state.difficulty;
     game.generate();
@@ -159,7 +160,13 @@ class _GamePlayPageState extends State<GamePlayPage> {
                 flex: 3,
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: AnalogClock(
+                  child: setting.useLightMode(context) ? AnalogClock.dark(
+                    key: _analogClockKey,
+                    secondHandWidthFactor: 0,
+                    secondHandLengthFactor: 0,
+                    dateTime: game.getTime(),
+                    isKeepTime: false,
+                  ) : AnalogClock(
                     key: _analogClockKey,
                     secondHandWidthFactor: 0,
                     secondHandLengthFactor: 0,

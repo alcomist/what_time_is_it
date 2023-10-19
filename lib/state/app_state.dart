@@ -121,6 +121,14 @@ class AppSettingState extends ChangeNotifier {
   ColorSeed colorSelected = ColorSeed.baseColor;
   ThemeMode themeMode = ThemeMode.dark;
 
+  void setThemeMode(BuildContext context) {
+    if ( View.of(context).platformDispatcher.platformBrightness == Brightness.light ) {
+      themeMode = ThemeMode.light;
+      return;
+    }
+    themeMode = ThemeMode.dark;
+  }
+
   bool useLightMode(BuildContext context) {
 
     switch (themeMode) {
