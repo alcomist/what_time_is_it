@@ -8,11 +8,11 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:window_size/window_size.dart';
 
-import 'package:what_time_is_it/app_state.dart';
+import 'package:what_time_is_it/constants.dart';
+import 'package:what_time_is_it/state/app_state.dart';
 import 'package:what_time_is_it/route/notifier.dart';
 import 'package:what_time_is_it/route/parser.dart';
 import 'package:what_time_is_it/route/delegate.dart';
-
 
 // window width and height for Windows app
 const double windowWidth = 480;
@@ -54,68 +54,44 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
-      ChangeNotifierProvider<PageNotifier>(create: (context) => PageNotifier()),
+      ChangeNotifierProvider<PageNotifier>(create: (_) => PageNotifier()),
       ChangeNotifierProvider<GameAppState>(create: (_) => GameAppState()),
+      ChangeNotifierProvider<AppSettingState>(create: (_) => AppSettingState()),
     ], child: const MainApp());
   }
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   const MainApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        routeInformationParser: AppRouteInformationParser(),
-        routerDelegate:
-            AppRouterDelegate(notifier: Provider.of<PageNotifier>(context)),
-        title: 'What time is it?',
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        theme: ThemeData(
-          //scaffoldBackgroundColor: Colors.green,
-          colorSchemeSeed: Colors.purple,
-          useMaterial3: true,
-          brightness: Brightness.dark,
-        ));
-  }
+  State<MainApp> createState() => _MainAppState();
 }
 
-class MainAppOld extends StatelessWidget {
-  const MainAppOld({super.key});
-
+class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    final setting = context.watch<AppSettingState>();
+
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
+      routeInformationParser: AppRouteInformationParser(),
+      routerDelegate:
+          AppRouterDelegate(notifier: Provider.of<PageNotifier>(context)),
       title: 'What time is it?',
-      theme: ThemeData(
-        brightness: Brightness.light,
-        primaryColor: Colors.green,
-        appBarTheme: AppBarTheme(
-          elevation: 10,
-          titleTextStyle: const TextTheme(
-            titleLarge: TextStyle(
-              fontFamily: 'LeckerliOne',
-              fontSize: 24,
-            ),
-          ).titleLarge,
-        ),
-      ),
-      //home: const LogoPage(),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      //localizationsDelegates: const [
-      //  AppLocalizations.delegate,
-      //  GlobalMaterialLocalizations.delegate,
-      //  GlobalWidgetsLocalizations.delegate,
-      //  GlobalCupertinoLocalizations.delegate,
-      //],
-      //supportedLocales: const [
-      //  Locale('en'), // English
-      //  Locale('ko'), // Korean
-      //],
+      themeMode: setting.themeMode,
+      theme: ThemeData(
+        colorSchemeSeed: setting.colorSelected.color,
+        useMaterial3: true,
+        brightness: Brightness.light,
+      ),
+      darkTheme: ThemeData(
+        colorSchemeSeed: setting.colorSelected.color,
+        useMaterial3: true,
+        brightness: Brightness.dark,
+      ),
     );
   }
 }

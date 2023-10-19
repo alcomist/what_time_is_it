@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:io' show Platform;
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +11,6 @@ class GameBannerPage extends StatefulWidget {
 }
 
 class _GameBannerState extends State<GameBannerPage> {
-
   BannerAd? _bannerAd;
   bool _isSupported = false;
 
@@ -36,14 +35,12 @@ class _GameBannerState extends State<GameBannerPage> {
       : 'ca-app-pub-3940256099942544/6300978111';
 
   Future<void> _loadAd() async {
-
     if (Platform.isAndroid || Platform.isIOS) {
-
       _isSupported = true;
 
       final AnchoredAdaptiveBannerAdSize? size =
-      await AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
-          MediaQuery.of(context).size.width.truncate());
+          await AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
+              MediaQuery.of(context).size.width.truncate());
 
       if (size == null) {
         debugPrint('Unable to get height of anchored banner.');
@@ -51,9 +48,7 @@ class _GameBannerState extends State<GameBannerPage> {
       }
 
       BannerAd(
-
         adUnitId: adUnitId,
-
         size: size,
         request: const AdRequest(),
         listener: BannerAdListener(
@@ -94,11 +89,10 @@ class _GameBannerState extends State<GameBannerPage> {
   }
 
   Widget _banner() {
-
-    if ( _bannerAd == null ) {
+    if (_bannerAd == null) {
       return SizedBox(
-          width: AdSize.largeBanner.width.toDouble(),
-          height: AdSize.largeBanner.height.toDouble(),
+        width: AdSize.largeBanner.width.toDouble(),
+        height: AdSize.largeBanner.height.toDouble(),
       );
     }
 
@@ -110,8 +104,7 @@ class _GameBannerState extends State<GameBannerPage> {
 
   @override
   Widget build(BuildContext context) {
-
-    if ( _isSupported == false ) {
+    if (_isSupported == false) {
       return _mockupBanner();
     }
 

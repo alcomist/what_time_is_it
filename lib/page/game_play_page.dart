@@ -8,7 +8,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:what_time_is_it/route/notifier.dart';
 import 'package:what_time_is_it/route/route.dart';
 
-import 'package:what_time_is_it/app_state.dart';
+import 'package:what_time_is_it/state/app_state.dart';
 import 'package:what_time_is_it/app_localization.dart';
 
 import 'banner_page.dart';

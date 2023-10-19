@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:what_time_is_it/constants.dart';
 
 enum GameDifficulty {
   easy,
@@ -112,5 +113,33 @@ class GameAppState extends ChangeNotifier {
 
   String getUser() {
     return user;
+  }
+}
+
+class AppSettingState extends ChangeNotifier {
+
+  ColorSeed colorSelected = ColorSeed.baseColor;
+  ThemeMode themeMode = ThemeMode.dark;
+
+  bool useLightMode(BuildContext context) {
+
+    switch (themeMode) {
+      case ThemeMode.system:
+        return View.of(context).platformDispatcher.platformBrightness == Brightness.light;
+      case ThemeMode.light:
+        return true;
+      case ThemeMode.dark:
+        return false;
+    }
+  }
+
+  void changeBrightness(bool useLightMode) {
+    themeMode = useLightMode ? ThemeMode.light : ThemeMode.dark;
+    notifyListeners();
+  }
+
+  void changeColor(int value) {
+    colorSelected = ColorSeed.values[value];
+    notifyListeners();
   }
 }

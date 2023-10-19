@@ -5,7 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:what_time_is_it/route/route.dart';
 import 'package:what_time_is_it/route/notifier.dart';
 
-import 'package:what_time_is_it/app_state.dart';
+import 'package:what_time_is_it/state/app_state.dart';
 import 'package:what_time_is_it/page/game_play_page.dart';
 
 import 'banner_page.dart';
@@ -83,7 +83,8 @@ class GameSelectPage extends StatelessWidget {
                       notifier.changePage(page: PageNames.gamePlay.name);
                     },
                     icon: const Icon(Icons.psychology_alt),
-                    label: Text(AppLocalizations.of(context)!.difficultyVeryHard,
+                    label: Text(
+                        AppLocalizations.of(context)!.difficultyVeryHard,
                         style: textStyle),
                   ),
                 ],
