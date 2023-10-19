@@ -1,5 +1,4 @@
 enum PageNames {
-  splash,
   main,
   setting,
   gameSelect,
@@ -14,8 +13,6 @@ class AppRoute {
   ];
 
   final String pageName;
-
-  AppRoute.splash() : pageName = PageNames.splash.name;
 
   AppRoute.main() : pageName = PageNames.main.name;
 
@@ -42,7 +39,6 @@ class AppRoute {
     }
 
     return switch (PageNames.values.byName(path)) {
-      PageNames.splash => AppRoute.splash(),
       PageNames.main => AppRoute.main(),
       PageNames.setting => AppRoute.setting(),
       PageNames.gamePlay => AppRoute.gamePlay(),

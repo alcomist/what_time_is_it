@@ -24,8 +24,6 @@ class AppRouterDelegate extends RouterDelegate<AppRoute>
         pages: [
           if (AppRoute.isUnknown(notifier.pageName))
             MaterialPage(child: MainPage()),
-          if (notifier.pageName == PageNames.splash.name)
-            MaterialPage(child: SplashPage()),
           if (notifier.pageName == PageNames.main.name)
             MaterialPage(child: MainPage()),
           if (notifier.pageName == PageNames.gameSelect.name)
