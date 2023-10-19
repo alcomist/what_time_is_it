@@ -1,18 +1,42 @@
-import 'package:flutter/foundation.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'dart:io' show Platform;
+
 import 'package:flutter/material.dart';
-
-import 'package:provider/provider.dart';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:provider/provider.dart';
+import 'package:window_size/window_size.dart';
+
+import 'package:what_time_is_it/app_state.dart';
 import 'package:what_time_is_it/route/notifier.dart';
 import 'package:what_time_is_it/route/parser.dart';
 import 'package:what_time_is_it/route/delegate.dart';
 
-import 'package:what_time_is_it/app_state.dart';
+
+// window width and height for Windows app
+const double windowWidth = 480;
+const double windowHeight = 854;
+
+void setupWindow() {
+  if (!kIsWeb && (Platform.isWindows || Platform.isLinux || Platform.isMacOS)) {
+    WidgetsFlutterBinding.ensureInitialized();
+    setWindowTitle('Animation Samples');
+    setWindowMinSize(const Size(windowWidth, windowHeight));
+    setWindowMaxSize(const Size(windowWidth, windowHeight));
+    getCurrentScreen().then((screen) {
+      setWindowFrame(Rect.fromCenter(
+        center: screen!.frame.center,
+        width: windowWidth,
+        height: windowHeight,
+      ));
+    });
+  }
+}
 
 void main() {
+  setupWindow();
+
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
 
