@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:what_time_is_it/state/app_state.dart';
-import 'package:what_time_is_it/banner.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
@@ -20,11 +19,6 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     final notifier = Provider.of<PageNotifier>(context);
-
-    GameBanner().load(context).then((value) {
-      debugPrint('Banner loaded in build');
-      notifier.changePage(page: PageNames.main.name);
-    });
 
     return SafeArea(
         child: Scaffold(

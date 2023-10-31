@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:window_size/window_size.dart';
 
@@ -15,13 +14,13 @@ import 'package:what_time_is_it/route/parser.dart';
 import 'package:what_time_is_it/route/delegate.dart';
 
 // window width and height for Windows app
-const double windowWidth = 480;
-const double windowHeight = 854;
+const double windowWidth = 675;
+const double windowHeight = 1200;
 
 void setupWindow() {
   if (!kIsWeb && (Platform.isWindows || Platform.isLinux || Platform.isMacOS)) {
     WidgetsFlutterBinding.ensureInitialized();
-    setWindowTitle('Animation Samples');
+    setWindowTitle('지금 몇 시일까요?');
     setWindowMinSize(const Size(windowWidth, windowHeight));
     setWindowMaxSize(const Size(windowWidth, windowHeight));
     getCurrentScreen().then((screen) {
@@ -36,15 +35,7 @@ void setupWindow() {
 
 void main() {
   setupWindow();
-
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize();
-
-  if (kDebugMode) {
-    MobileAds.instance.updateRequestConfiguration(RequestConfiguration(
-        testDeviceIds: ['42ABE9B8A4BD7D6A8AFB3A3F616A11BF']));
-  }
-
   runApp(const App());
 }
 
@@ -84,12 +75,12 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
       themeMode: setting.themeMode,
       theme: ThemeData(
         colorSchemeSeed: setting.colorSelected.color,
-        useMaterial3: true,
+        useMaterial3: setting.useMaterial3,
         brightness: Brightness.light,
       ),
       darkTheme: ThemeData(
         colorSchemeSeed: setting.colorSelected.color,
-        useMaterial3: true,
+        useMaterial3: setting.useMaterial3,
         brightness: Brightness.dark,
       ),
     );

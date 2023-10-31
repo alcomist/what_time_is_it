@@ -120,6 +120,7 @@ class AppSettingState extends ChangeNotifier {
 
   ColorSeed colorSelected = ColorSeed.baseColor;
   ThemeMode themeMode = ThemeMode.dark;
+  bool useMaterial3 = true;
 
   void setThemeMode(BuildContext context) {
     if ( View.of(context).platformDispatcher.platformBrightness == Brightness.light ) {
@@ -148,6 +149,11 @@ class AppSettingState extends ChangeNotifier {
 
   void changeColor(int value) {
     colorSelected = ColorSeed.values[value];
+    notifyListeners();
+  }
+
+  void changeMaterial() {
+    useMaterial3 = !useMaterial3;
     notifyListeners();
   }
 }

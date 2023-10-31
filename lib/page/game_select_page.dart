@@ -8,14 +8,12 @@ import 'package:what_time_is_it/route/notifier.dart';
 import 'package:what_time_is_it/state/app_state.dart';
 import 'package:what_time_is_it/page/game_play_page.dart';
 
-import 'banner_page.dart';
-
 class GameSelectPage extends StatelessWidget {
   const GameSelectPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = Theme.of(context).textTheme.titleLarge;
+    final textStyle = Theme.of(context).textTheme.headlineMedium;
 
     final buttonStyle =
         ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(100));
@@ -28,7 +26,7 @@ class GameSelectPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           AppLocalizations.of(context)!.chooseDifficulty,
-          style: Theme.of(context).textTheme.titleLarge,
+          style: Theme.of(context).textTheme.headlineLarge,
         ),
         leading: IconButton(
           icon: const Icon(Icons.home),
@@ -90,7 +88,6 @@ class GameSelectPage extends StatelessWidget {
                 ],
               ),
             ),
-            const GameBannerPage(),
           ],
         ),
       ),

@@ -11,8 +11,6 @@ import 'package:what_time_is_it/route/route.dart';
 import 'package:what_time_is_it/state/app_state.dart';
 import 'package:what_time_is_it/app_localization.dart';
 
-import 'banner_page.dart';
-
 class GamePlayPage extends StatefulWidget {
   const GamePlayPage({super.key});
 
@@ -132,7 +130,7 @@ class _GamePlayPageState extends State<GamePlayPage> {
         centerTitle: true,
         title: Text(
             AppLocalization.getDifficultyTitle(context, game.difficulty),
-            style: Theme.of(context).textTheme.titleLarge),
+            style: Theme.of(context).textTheme.headlineLarge),
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () {
@@ -154,12 +152,12 @@ class _GamePlayPageState extends State<GamePlayPage> {
               child: Text(
                   AppLocalizations.of(context)!
                       .currentGame(state.userAnswers.length + 1, 10),
-                  style: Theme.of(context).textTheme.titleMedium),
+                  style: Theme.of(context).textTheme.titleLarge),
             ),
             Flexible(
                 flex: 3,
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: setting.useLightMode(context) ? AnalogClock.dark(
                     key: _analogClockKey,
                     secondHandWidthFactor: 0,
@@ -177,14 +175,14 @@ class _GamePlayPageState extends State<GamePlayPage> {
             Flexible(
               flex: 4,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: GridView.builder(
                   itemCount: 4, //item 개수
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 1, //1 개의 행에 보여줄 item 개수
                     childAspectRatio: 8, //item 의 가로 8, 세로 1 의 비율
-                    mainAxisSpacing: 10, //수평 Padding
-                    crossAxisSpacing: 10, //수직 Padding
+                    mainAxisSpacing: 20, //수평 Padding
+                    crossAxisSpacing: 20, //수직 Padding
                   ),
                   itemBuilder: (BuildContext context, int index) {
                     //item 의 반목문 항목 형성
@@ -209,7 +207,6 @@ class _GamePlayPageState extends State<GamePlayPage> {
                 ),
               ),
             ),
-            const GameBannerPage(),
           ],
         ),
       ),

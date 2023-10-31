@@ -11,7 +11,6 @@ import 'package:what_time_is_it/route/notifier.dart';
 import 'package:what_time_is_it/route/route.dart';
 
 import 'package:what_time_is_it/page/user_select_page.dart';
-import 'package:what_time_is_it/page/banner_page.dart';
 import 'package:what_time_is_it/state/app_state.dart';
 
 class _BrightnessButton extends StatelessWidget {
@@ -84,12 +83,84 @@ class _ColorSeedButton extends StatelessWidget {
   }
 }
 
+class _AboutButton extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+
+    final setting = context.watch<AppSettingState>();
+
+    return PopupMenuButton(
+      icon: Icon(
+        Icons.palette_outlined,
+        color: Theme.of(context).colorScheme.onSurfaceVariant,
+      ),
+      tooltip: 'Select a seed color',
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      itemBuilder: (context) {
+        return List.generate(ColorSeed.values.length, (index) {
+          ColorSeed currentColor = ColorSeed.values[index];
+
+          return PopupMenuItem(
+            value: index,
+            enabled: currentColor != setting.colorSelected,
+            child: Wrap(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Icon(
+                    currentColor == setting.colorSelected
+                        ? Icons.color_lens
+                        : Icons.color_lens_outlined,
+                    color: currentColor.color,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(currentColor.label),
+                ),
+              ],
+            ),
+          );
+        });
+      },
+      onSelected: (index) {
+        setting.changeColor(index);
+      },
+    );
+  }
+}
+
+class _Material3Button extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+
+    final setting = context.watch<AppSettingState>();
+    final useMaterial3 = Theme.of(context).useMaterial3;
+
+    return Tooltip(
+      preferBelow: true,
+      message: 'Switch to Material ${useMaterial3 ? 2 : 3}',
+      child: IconButton(
+        icon: useMaterial3
+            ? const Icon(Icons.filter_2)
+            : const Icon(Icons.filter_3),
+        onPressed: () {
+          setting.changeMaterial();
+        },
+      ),
+    );
+  }
+}
+
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
   @override
   State<MainPage> createState() => _MainPageState();
 }
+
 
 class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   final GlobalKey<AnalogClockState> _analogClockKey = GlobalKey();
@@ -98,6 +169,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
 
   PreferredSizeWidget createAppBar() {
     return AppBar(actions: [
+      //_Material3Button(),
       _BrightnessButton(),
       _ColorSeedButton(),
     ]);
@@ -156,7 +228,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                     children: [
                       Text(
                         AppLocalizations.of(context)!.appTitle,
-                        style: Theme.of(context).textTheme.headlineLarge,
+                        style: Theme.of(context).textTheme.displaySmall,
                       ),
                       Flexible(
                         child: Padding(
@@ -175,7 +247,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                     ],
                   ),
                 ),
-                const GameBannerPage(),
               ],
             )));
   }
@@ -265,7 +336,6 @@ class _MainPageStateOld extends State<MainPage> with TickerProviderStateMixin {
                     ],
                   ),
                 ),
-                const GameBannerPage(),
               ],
             )));
   }
