@@ -1,16 +1,34 @@
-# whattimeisit
+# 지금 몇 시일까요?
 
-A new Flutter project.
+플러터를 이용해 개발한 앱입니다.
+
+아날로그 시계의 바늘이 몇 시 몇 분을 가리키고 있는지, 객관식 문제 중에 답을 고르는 앱입니다.
+
+한번에 10문제가 출제됩니다. 10점 만점을 받을 수 있도록 연습해 보세요.
+
+아날로그 시계에 익숙하지 않은 유아나 초등학생 저학년을 위해 만든 앱입니다.
+
+광고 및 제한 사항이 없으니 마음껏 즐겨주세요.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+아래 구글 플레이에서 안드로이드용 앱을 다운받아 플레이 하실 수 있습니다.
 
-A few resources to get you started if this is your first Flutter project:
+프로젝트를 Jetbrains Intellij 나 Visual studio code에서 불러와서 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+컴파일 하시면 윈도우용 / macOS에서도 플레이 하실 수 있습니다.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [구글 플레이](https://play.google.com/store/apps/details?id=store.unitedapp.what_time_is_it)
+
+스크린샷
+
+/![스크린샷1](/screenshot/1.png)
+/![스크린샷2](/screenshot/2.png)
+/![스크린샷3](/screenshot/3.png)
+/![스크린샷4](/screenshot/4.png)
+/![스크린샷5](/screenshot/5.png)
+/![스크린샷6](/screenshot/6.png)
+/![스크린샷7](/screenshot/7.png)
+
+
+
