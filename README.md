@@ -22,13 +22,13 @@
 
 스크린샷
 
-/![스크린샷1](/screenshot/1.png)
-/![스크린샷2](/screenshot/2.png)
-/![스크린샷3](/screenshot/3.png)
-/![스크린샷4](/screenshot/4.png)
-/![스크린샷5](/screenshot/5.png)
-/![스크린샷6](/screenshot/6.png)
-/![스크린샷7](/screenshot/7.png)
+![스크린샷1](/screenshot/1.png)
+![스크린샷2](/screenshot/2.png)
+![스크린샷3](/screenshot/3.png)
+![스크린샷4](/screenshot/4.png)
+![스크린샷5](/screenshot/5.png)
+![스크린샷6](/screenshot/6.png)
+![스크린샷7](/screenshot/7.png)
 
 
 
