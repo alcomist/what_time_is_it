@@ -14,8 +14,8 @@ import 'package:what_time_is_it/route/parser.dart';
 import 'package:what_time_is_it/route/delegate.dart';
 
 // window width and height for Windows app
-const double windowWidth = 675;
-const double windowHeight = 1200;
+const double windowWidth = 600;
+const double windowHeight = 800;
 
 void setupWindow() {
   if (!kIsWeb && (Platform.isWindows || Platform.isLinux || Platform.isMacOS)) {
